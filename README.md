@@ -7,7 +7,7 @@ PinyinTuner is a pinyin (平仄) checker for editing or analyzing Hanzi poems (�
 Edit the poem text in the textarea.
 Each line usually contains 5 or 7 characters.
 Press submit button to show the pinyin result.
-the author and title can be empty.
+The author and title can be empty.
 
 A white hanzi character in a black background box is 「仄 (zè)」.
 A black character in white is 「平 (píng)」.
