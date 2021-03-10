@@ -1,6 +1,6 @@
 # PinyinTuner
 
-PinyinTuner is a pinyin checker for editing Hanzi poems.
+PinyinTuner is a pinyin (平仄) checker for editing or analyzing Hanzi poems (漢詩).
 
 ## Usage
 
