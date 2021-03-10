@@ -1,3 +1,3 @@
 # PinyinTuner
 
-See PinyinTuner branch. Currently there is nothing here.
+See the Alpha branch. Currently there is nothing here.
