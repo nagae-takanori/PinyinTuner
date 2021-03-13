@@ -4711,6 +4711,7 @@ var Mandarin = {
 '朁':'can3',
 '會':'hui4',
 '會':'kuai4',
+'会':'kuai4',
 '朅':'qie4',
 '朆':'fen1',
 '月':'yue4',
