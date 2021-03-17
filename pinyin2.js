@@ -34,8 +34,8 @@ var pinyin_line = function(str){
 };
 
 
-var lineByLine = function(line, row){// currently the value row is not used
-	var tmp = '';
+var lineByLine = function(line, row){
+	var tmp = '<span style="z-index:' + row + ';">';
 	var column = 0;
 	$.each(line.split(""), function(index, char){
 		var values = CHARACTERS[char];
@@ -107,7 +107,7 @@ var lineByLine = function(line, row){// currently the value row is not used
 			tmp += '<div class="spacebox"></div>';
 		}
 	});
-	tmp += '<br clear="all">';
+	tmp += '</span><br clear="all">';
 	$('#matrix').append(tmp);
 };
 
@@ -128,7 +128,7 @@ var mainProc = function(){
 	var row = 0;
 	$.each(lines, function(i, v){
 		lineByLine(v.replace(/^\s+|\s+$/g, ""), row);
-		row += 1;
+		row -= 1;
 	});
 	$(".ruby").click(
 		function(){
