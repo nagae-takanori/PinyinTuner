@@ -145,7 +145,8 @@ var mainProc = function(){
 			var c = this.className.split(' ')[0];// 同一韻
 			var d = [];// 通韻
 			
-			$(this).children().show();
+			$(this).children().fadeIn('fast');
+			$(this).parent().css('z-index',9999);
 			$.each(Compatibles, function(i, v){
 				if(v.indexOf(c) >= 0){
 					d = v;
@@ -174,7 +175,7 @@ var mainProc = function(){
 			});
 		},
 		function(){// マウスオーバー終了
-			$(this).children().hide();
+			$(this).children().fadeOut('fast');
 			$(".ruby").each(function(i, v){
 				v.style.color = '';
 				v.style.backgroundColor = '';
