@@ -145,8 +145,7 @@ var mainProc = function(){
 			var c = this.className.split(' ')[0];// 同一韻
 			var d = [];// 通韻
 			
-			$(this).children().fadeIn('fast');
-			$(this).parent().css('z-index',9999);
+			$('#messages').html($(this).children().html());
 			$.each(Compatibles, function(i, v){
 				if(v.indexOf(c) >= 0){
 					d = v;
@@ -166,7 +165,7 @@ var mainProc = function(){
 					});
 				}
 			});
-			$('#messages').html('');
+
 			showMatches(c, "same");
 			$.each(d, function(i, v){
 				if(v != c){
@@ -175,7 +174,6 @@ var mainProc = function(){
 			});
 		},
 		function(){// マウスオーバー終了
-			$(this).children().fadeOut('fast');
 			$(".ruby").each(function(i, v){
 				v.style.color = '';
 				v.style.backgroundColor = '';
