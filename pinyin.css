@@ -2,7 +2,7 @@
 * { margin: 0; padding: 0; }
 a { text-decoration: none; }
 body { background-image: url("bg.jpg"); font-family: 'UD Digi Kyokasho NP-R'; }
-#wrapper { width: 1200px; margin: 0 auto; }
+#wrapper { width: 1600px; margin: 0 auto; }
 h1 {
 text-align: center;
 font-family: 'Times New Roman';
@@ -18,20 +18,21 @@ h3 { margin-top: 15px; }
 h4 { font-family: serif; font-weight: bold; }
 hr { margin: 10px 0 10px 0; }
 #header { margin-top: 10px; margin-bottom: 10px; }
-#sidebar { float:left; width: 260px; margin: 0 20px 20px 20px; }
-#sidebar ul li {
+#sidebar { float:left; width: 200px; margin: 0 10px 20px 20px; }
+#sidebar2 { float:left; width: 260px; margin: 0 10px 20px 0; }
+#sidebar2 ul li {
 	/* list-style-type: none; */
 	padding: 2px 0 2px 5px;
 	width: 250px;
 	height: 16px;
 	display: inline;
 }
-#sidebar ul li:hover {
+#sidebar2 ul li:hover {
 	background-color: #dddddd;
 }
 .ex {
 	margin: 10px 0 0 0;
-	height: 300px;
+	height: 400px;
 	overflow: hidden scroll;
 }
 #aux { margin: 20px; }
@@ -95,6 +96,6 @@ hr { margin: 10px 0 10px 0; }
 .box { margin: 2Spx 0 0 0; font-size: 14px; width: 245px; background-image: url("washi1.jpg"); display: none; border: solid 2px black; padding: 5px; text-align: left; font-family: serif; }
 .same { background-color: yellow; }
 .compat { background-color: lightgreen; }
-input { background-image: url("washi1.jpg"); font-family: 'UD Digi Kyokasho N-R'; }
+input { background-image: url("washi1.jpg"); font-family: 'UD Digi Kyokasho N-R'; width: 200px; }
 textarea { width: 200px; background-image: url("washi1.jpg"); font-family: 'UD Digi Kyokasho N-R'; }
 .moji { display: inline; }
