@@ -202,8 +202,17 @@ var exampleListing = function(poetry, num){
 };
 
 $(function(){// ページが読み込まれた直後に一度だけ呼ばれる関数
+	// プログラムの名前やバージョンなどを html の中に埋め込む
 	$('.program_name').html(ProgramName);
 	$('.version').html(Version);
+	$('title').html(ProgramName + ' ' + Version);
+
+	// デフォルトの詩を埋め込む
+	var author = "夏目漱石";
+	var title = "山路觀楓";
+	$("input[name='author']").val(author);
+	$("input[name='title']").val(title);
+	$('textarea').val(DefaultPoem[author][title].replace(/\s/g, "\n"));
 
 	$('#button1').on('click', mainProc);// 送信ボタンを押したら
 	mainProc();// 送信ボタンを押さなくても最初の1回は
