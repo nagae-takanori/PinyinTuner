@@ -2,70 +2,81 @@
 <head>
 <link rel="stylesheet" href="./pinyin.css">
 <title>
-平仄くんνέο
+Pinyin Tuner 平仄くんνέο
 </title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="./prons.js"></script>
+<script src="./characters.js"></script>
 <script src="./poetry.js"></script>
 <script src="./letters.js"></script>
-<script src="./pinyin.js"></script>
+<script src="./pinyin2.js"></script>
 </head>
 <body>
 <div id="wrapper">
 <div id="header">
 <h1><span class="program_name"></span> <span class="version"></span></h1>
 </div>
+
 <div id="sidebar">
-<input type="text" name="author" value="夏目漱石">作者<br>
-<input type="text" name="title" value="山路觀風">題<br>
+Author
+<input type="text" name="author" value="夏目漱石"><br>
+Title
+<input type="text" name="title" value="山路觀風"><br>
+Text<br>
 <textarea rows=15 cols=20 name="poetry">
 石苔沐雨滑難攀
 渡水穿林往又還
 處處鹿聲尋不得
 白雲紅葉滿千山
-</textarea>漢詩文<br>
-<button id="button1">送信</button>
+</textarea><br>
+<button id="button1">Submit</button>
 <div id="debug"></div>
+</div><!-- sidebar -->
 
-<div class="menu">例文
+<div id="sidebar2">
+
+<div class="menu">Examples 1
+<div id="examples1" class="ex box"><ul></ul></div>
+</div>
+<div class="menu">Examples 2
+<div id="examples2" class="ex box"><ul></ul></div>
+</div>
+<div class="menu">Examples 3
+<div id="examples3" class="ex box"><ul></ul></div>
+</div>
+
+<div class="menu">Usage
 <div class="box">
-<div id="examples"><ul></ul></div>
+Edit the poem text.
+Each line usually contains 5 or 7 characters.
+Press submit button to show the pinyin result.
+the author and title can be empty.
+<p>
+A white hanzi character in a black background box is 「仄 (zè)」。
+A black character in white is 「平 (píng)」。
+A gray background indicates the character can have multiple accents 「平」 or 「仄」 (The accent depends on the usage of the character)。
+Rhyme characters are simultaneously highlighted in yellow when hovered.
+Green highlights are 「通韻」, that is, they have similar rhymes。
+Red hanzi characters are currently not recognized by this software. 
+You may try other variant characters.
 </div>
 </div>
 
-<div class="menu">ヒント
+<div class="menu">About this software
 <div class="box">
-「作者」「題」「漢詩文」に入力して「送信」を押します。「作者」「題」などは空欄でも大丈夫です。
+<span class="program_name"></span> ver. <span class="version"></span> by NAGAE Takanori<br>
+
+The Mandarin pronunciations are borrowed from the dataset
+<a href="https://www.mdbg.net/chinese/dictionary?page=cc-cedict">CC-CEDICT</a>,
+and this software is also provided under the Creative Commons 4.0 BY-NC-SA 
+<img src="120px-Cc-by-nc-sa_icon.svg.png">
 <p>
-黒地に白は「仄」です。白地に黒は「平」です。灰色に黒文字は場合によって「平」か「仄」のどちらかです。
-押韻した箇所はマウスオーバーで黄色くハイライトします。
-緑色のハイライトは通韻です。
-赤地は漢字未収録のために判定不能です。 うまくいかないときは異体字などに置換してみてください。
+You may send any comments to my twitter account
+<a href="https://twitter.com/nagae_takanori">@nagae_takanori</a>
 </div>
 </div>
 
-<div class="menu">その他
-<div class="box">
-ver. <span class="version"></span> by NAGAE Takanori<br>
-漢字音には
-<a href="https://www.mdbg.net/chinese/dictionary?page=cc-cedict">CC-CEDICT</a>を使っています。
+</div><!-- sidebar2 -->
 
-<img src="120px-Cc-by-nc-sa_icon.svg.png"><br>
-<span class="program_name"></span>は完全にクライアントサイドのスクリプトになっているので、ダウンロードすれば自分のパソコンのブラウザでも動作します。
-developers.google.com から提供されている jquery を使っているので、pinyin.js に書かれているリンクをときどき最新版に張り直したほうが良いです。
-<p>
-このソフトウェアが誤作動しても作者は対応も保証もしかねます。平水韻の分類には間違いや漏れがあるかもしれません。
-<p>
-このソフトウェアを利用するに当たって、特に連絡をくださる必要はありませんが、引用していただけると作者としてはうれしいです。
-<p>
-ライセンスは CC- CEDICT に合わせて Creative Commons 4.0 BY-NC-SA (表示+非営利+継承) にしておきました。
-<p>
-ご要望ご意見があればツイッターアカウント<a href="https://twitter.com/nagae_takanori">@nagae_takanori</a>
-か何かにお寄せください。
-</div>
-</div>
-
-</div>
 <div id="main"></div>
 <div id="messages"></div>
 </div>
