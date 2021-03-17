@@ -5,27 +5,34 @@
 Pinyin Tuner 平仄くんνέο
 </title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="./prons.js"></script>
+<script src="./characters.js"></script>
 <script src="./poetry.js"></script>
 <script src="./letters.js"></script>
-<script src="./pinyin.js"></script>
+<script src="./pinyin2.js"></script>
 </head>
 <body>
 <div id="wrapper">
 <div id="header">
 <h1><span class="program_name"></span> <span class="version"></span></h1>
 </div>
+
 <div id="sidebar">
-<input type="text" name="author" value="夏目漱石">Author<br>
-<input type="text" name="title" value="山路觀風">Title<br>
+Author
+<input type="text" name="author" value="夏目漱石"><br>
+Title
+<input type="text" name="title" value="山路觀風"><br>
+Text<br>
 <textarea rows=15 cols=20 name="poetry">
 石苔沐雨滑難攀
 渡水穿林往又還
 處處鹿聲尋不得
 白雲紅葉滿千山
-</textarea>Text<br>
+</textarea><br>
 <button id="button1">Submit</button>
 <div id="debug"></div>
+</div><!-- sidebar -->
+
+<div id="sidebar2">
 
 <div class="menu">Examples 1
 <div id="examples1" class="ex box"><ul></ul></div>
@@ -68,7 +75,8 @@ You may send any comments to my twitter account
 </div>
 </div>
 
-</div>
+</div><!-- sidebar2 -->
+
 <div id="main"></div>
 <div id="messages"></div>
 </div>
