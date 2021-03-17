@@ -100,4 +100,4 @@ hr { margin: 10px 0 10px 0; }
 input { background-image: url("washi1.jpg"); font-family: 'UD Digi Kyokasho N-R'; width: 200px; }
 textarea { width: 200px; background-image: url("washi1.jpg"); font-family: 'UD Digi Kyokasho N-R'; }
 .moji { display: inline; }
-.hint { display:none; }
+.hint { display:none; color: red; }
