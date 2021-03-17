@@ -1,5 +1,5 @@
-var ProgramName = '平仄くん νέο';
-var Version = 20210310;
+var ProgramName = 'Pinyin Tuner';
+var Version = 20210316;
 
 // カテゴリー 0から4まで
 var PinyinClasses = ["上平声", "下平声", "上声", "去声", "入声"];
@@ -95,7 +95,7 @@ var lineByLine = function(line, row){// currently the value row is not used
 		}
 		tmp += '">';
 		tmp += '<a class="large ' +  tone +  '" href="' + encodeURI('http://ja.wiktionary.org/wiki/' + char) + '">' + char + '</a><br>';
-		tmp += tmp2;
+		tmp += '<span>' + tmp2 + '</span>';
 		tmp += '<br><span class="mruby">' + mchar + '</span>';// 北京語のルビ
 		tmp += '</div>';
 		if(line.length == 7){// 七言のとき、2字目と4字目の後に空白を入れる。
@@ -129,6 +129,16 @@ var mainProc = function(){
 		lineByLine(v.replace(/^\s+|\s+$/g, ""), row);
 		row += 1;
 	});
+	$(".ruby").click(
+		function(){
+			var char = $(this).parent().prev().prev();
+			if($(this).hasClass("oblique")){
+				char.removeClass("mixed level").addClass("oblique");
+			} else if($(this).hasClass("level")){
+				char.removeClass("mixed oblique").addClass("level");
+			};
+		}
+	);
 	$(".ruby").hover( // ルビのマウスオーバーの処理（再描画されるたびにイベントを再登録する必要がある）
 		function(){// マウスオーバー開始
 			var c = this.className.split(' ')[0];// 同一韻
@@ -170,6 +180,25 @@ var mainProc = function(){
 	);
 };
 
+var exampleListing = function(poetry, num){
+	$.each(poetry, function(i0, v0){
+		$.each(v0, function(i1, v1){
+			$('#examples' + num + ' ul').append('<li>' + i0 + ' ' + i1 + '</li><br>');
+		});
+	});
+	// 例文をクリックしたときの処理
+	$('#examples' + num + ' ul li').each(function(i, v){
+		var tmp = $(v).text().split(' ');
+		var tmp2 = poetry[tmp[0]][tmp[1]].replace(/\s/g, "\n");
+		$(v).on('click', function(){
+			$('input[name="author"]').val(tmp[0]);
+			$('input[name="title"]').val(tmp[1]);
+			$('textarea[name="poetry"]').val(tmp2);
+			mainProc();
+		});
+	});
+};
+
 $(function(){// ページが読み込まれた直後に一度だけ呼ばれる関数
 	$('.program_name').html(ProgramName);
 	$('.version').html(Version);
@@ -178,23 +207,10 @@ $(function(){// ページが読み込まれた直後に一度だけ呼ばれる�
 	mainProc();// 送信ボタンを押さなくても最初の1回は
 	
 	// 例文のリスト
-	$.each(POETRY, function(i0, v0){
-		$.each(v0, function(i1, v1){
-			$('#examples ul').append('<li>' + i0 + ' ' + i1 + '</li><br>');
-		});
-	});
-	// 例文をクリックしたときの処理
-	$('#examples ul li').each(function(i, v){
-		var tmp = $(v).text().split(' ');
-		var tmp2 = POETRY[tmp[0]][tmp[1]].replace(/\s/g, "\n");
-		$(v).on('click', function(){
-			$('input[name="author"]').val(tmp[0]);
-			$('input[name="title"]').val(tmp[1]);
-			$('textarea[name="poetry"]').val(tmp2);
-			mainProc();
-		});
-	});
-	
+	exampleListing(POETRY, 1);
+	exampleListing(POETRY2, 2);
+	exampleListing(POETRY3, 3);
+
 	// いわゆるアコーディオン
 	$('.box').on('click', function (ev) { // 親へ伝播不可にする（メニューの中身をクリックしても反応しないように）。
        	ev.stopPropagation();
