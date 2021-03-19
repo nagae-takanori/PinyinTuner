@@ -39,9 +39,12 @@ var lineByLine = function(line, row){
 	var column = 0;
 	$.each(line.split(""), function(index, char){
 		var values = CHARACTERS[char];
-		var accent0 = values[0];
-		var accent1 = values[1];
-		var results = values[2];
+		var accent0 = 'unknown', accent1 = 5, results = [];
+		if(null != values){
+			accent0 = values[0];
+			accent1 = values[1];
+			results = values[2];
+		}
 		var numObliq = 0;// 仄の数
 		var numLevel = 0;// 平の数
 
