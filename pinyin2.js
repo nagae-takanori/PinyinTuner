@@ -33,9 +33,11 @@ var pinyin_line = function(str){
 	return retval;
 };
 
+var numLines;// 行の数
+var lineLength;// 行の長さ
 
-var lineByLine = function(line, row){
-	var tmp = '<span style="z-index:' + row + ';">';
+var lineByLine = function(line){
+	var tmp = '';
 	var column = 0;
 	$.each(line.split(""), function(index, char){
 		var values = CHARACTERS[char];
@@ -47,6 +49,7 @@ var lineByLine = function(line, row){
 		}
 		var numObliq = 0;// 仄の数
 		var numLevel = 0;// 平の数
+		var rhymes = []; // 韻
 
 		var tmp2 = '';
 		column += 1;
@@ -59,7 +62,9 @@ var lineByLine = function(line, row){
 				numObliq += 1;
 				tone = "oblique";
 			}
-			tmp2 += '<span class="' + v1[0] + '_' + (v1[1] + 1) + ' ' + tone + ' ruby">' + v1[2] + '<span class="hint">' + v1[3] + '</span></span>';
+			var rhyme = v1[0] + '_' + (v1[1] + 1);
+			rhymes.push(rhyme); 
+			tmp2 += '<span class="' + rhyme + ' ' + tone + ' ruby">' + v1[2] + '<span class="hint">' + v1[3] + '</span></span>';
 		});
 		
 		if(results.length > 1){ // 複数判定
@@ -98,7 +103,11 @@ var lineByLine = function(line, row){
 			tmp += 'bg_unknown';
 		}
 		tmp += '">';
-		tmp += '<a class="large ' +  tone +  '" href="' + encodeURI('http://ja.wiktionary.org/wiki/' + char) + '">' + char + '</a><br>';
+		tmp += '<a class="large ' + tone; // 平仄
+		if(column == lineLength){// 末尾の文字
+			tmp += ' rhyme" data-x="' + rhymes.join(' '); // カスタム属性 data-x に韻を入れる。
+		}
+		tmp += '" href="' + encodeURI('http://ja.wiktionary.org/wiki/' + char) + '">' + char + '</a><br>';
 		tmp += '<span>' + tmp2 + '</span>';
 		tmp += '<br><span class="mruby">' + accent0 + accent1 + '</span>';// 北京語のルビ
 		tmp += '</div>';
@@ -120,19 +129,120 @@ var showMatches = function(chr, cls){
 		Pronouns[tmp[0]][tmp[1] - 1] + '/</h4>' + LETTERS[tmp[0]][tmp[1] - 1].join(' '));
 };
 
+var verticalView = function(){
+	var tbl = [];
+	var arr;
+	var j = 0;
+
+	$('.large').each(function(i, v){
+		if(0 == j % lineLength){
+			arr = [];
+		}
+		var val1 = 0, val2 = 0;
+		if($(v).hasClass('level')) {
+			val1 = 1;
+		} else if($(v).hasClass('mixed')) {
+			val1 = 2;
+		}
+		if($(v).hasClass('rhyme')){
+			val2 = 1;
+		}
+		arr.push([$(v).text(), val1, val2]);
+		j += 1;
+		if(j % lineLength == 0){
+			tbl.push(arr);
+		}
+	});
+
+	var tmp = '';
+	j = 0;
+	var i = 0;
+	for(j = 0; numLines > j; j += 1){
+		tmp += '<div class="vline">';
+		for(i = 0; lineLength > i; i += 1){
+			tmp += '<div class="';
+			if(tbl[j][i][2] == 1){
+				tmp += 'rhyme ';
+			}
+			switch(tbl[j][i][1]){
+			case 0:
+				tmp += 'voblique';
+				break;
+			case 1:
+				tmp += 'vlevel';
+				break;
+			case 2:
+				tmp += 'vmixed';
+				break;
+			}
+			tmp += '">' + tbl[j][i][0] + '</div>';
+		}
+		tmp += '</div>';
+		if(j == numLines - 1){
+			break;
+		}
+		tmp += '<div class="vline">';
+		for(i = 0; lineLength > i; i += 1){
+			tmp += '<div class="vlevel">';
+			if(i % 2 == 0){
+				tmp += ' ';
+			} else if(tbl[j][i][1] == tbl[j + 1][i][1]){
+				tmp += '＝';
+			} else {
+				tmp += '↔';
+			}
+			tmp += '</div>';
+		}
+		tmp += '</div>';
+	}
+
+	$('#lightbox').css('width', 56 * (2 * numLines - 1))
+		.css('height', 46 * lineLength)
+		.html(tmp);
+	$('#lightbox').fadeIn('slow');// じわっと浮き出る。
+	$('#darkbox').show();
+};
+
+var isDuplicate = function(data1, data2) {
+	var retval = false;
+	if(null != data1){// quick hack
+	$.each(data1.split(' '), function(i, v){
+		if(data2.includes(v)){
+			retval = true;
+		}
+	});
+	}
+	return retval;
+};
+
 var mainProc = function(){
 	var author = $('input[name="author"]').val();
 	var title = $('input[name="title"]').val();
 	var poetry = $('textarea[name="poetry"]').val();
 	var lines = poetry.split(/\n|\s/);
+	numLines = lines.length;
+	lineLength = lines[0].length;
 	$('#main').html('<h2><a href="' +  encodeURI('http://ja.wikipedia.org/wiki/' + author) + '">' +
 		author + '</a> ' + title + '</h2><div id="matrix"></div>');
 	
-	var row = 0;
 	$.each(lines, function(i, v){
-		lineByLine(v.replace(/^\s+|\s+$/g, ""), row);
-		row -= 1;
+		lineByLine(v.replace(/^\s+|\s+$/g, ""));
 	});
+	var rhymes = [];
+	$('.rhyme').each(function(i, v){
+		rhymes.push(v);
+	});
+	var rhymelast = rhymes.pop();
+	var data1 = $(rhymelast).attr('data-x');
+	$.each(rhymes, function(i, v){
+		var data2 =  $(v).attr('data-x');
+		var retval = isDuplicate(data1, data2);
+		//console.log(data1 + ',' + data2 + ',' + retval);
+		if(!retval){
+			$(v).removeClass('rhyme');
+		}
+	});
+	
 	$(".ruby").click(
 		function(){
 			var char = $(this).parent().prev().prev();
@@ -216,6 +326,12 @@ $(function(){// ページが読み込まれた直後に一度だけ呼ばれる�
 	$("input[name='author']").val(author);
 	$("input[name='title']").val(title);
 	$('textarea').val(DefaultPoem[author][title].replace(/\s/g, "\n"));
+	
+	$('#button2').on('click', verticalView);
+	$('#lightbox').click(function(){// ライトボックスをクリックしたら
+		$('#lightbox').fadeOut('fast');// じわっと消える。
+		$('#darkbox').hide();
+	});
 
 	$('#button1').on('click', mainProc);// 送信ボタンを押したら
 	mainProc();// 送信ボタンを押さなくても最初の1回は

@@ -1,8 +1,49 @@
 @charset "UTF-8";
-* { margin: 0; padding: 0; z-index: 0; }
-a { text-decoration: none; }
-body { background-image: url("bg.jpg"); font-family: 'UD Digi Kyokasho NP-R'; }
-#wrapper { width: 1600px; margin: 0 auto; }
+* {
+	margin: 0;
+	padding: 0;
+	z-index: 0;
+}
+a {
+	text-decoration: none;
+}
+html {
+	height: 100%;
+}
+body {
+	background-image: url("bg.jpg");
+	font-family: 'UD Digi Kyokasho NP-R';
+	height: 100%;
+}
+#wrapper {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+#darkbox {
+	position: absolute;
+	top: 0px; left: 0px;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	background-color: black;
+	display: none;
+	opacity: 0.5;
+}
+#lightbox {
+	position: relative;
+	padding: 50px;
+	width: 50%;
+	margin: 50px auto;
+	background-color: white;
+	display: none;
+}
+.vline {
+	float: right;
+	margin: 0 1px;
+	font-size: 40px;
+}
 h1 {
 text-align: center;
 font-family: 'Times New Roman';
@@ -10,8 +51,8 @@ text-decoration: none;
 transition: text-shadow 1s ease-out;
 }
 h1:hover {
-color: #f22;
-text-shadow: 0px 0px 5px #ffff00, 0px 0px 8px #ff8000, 0px -2px 10px #ff0000;
+	color: #f22;
+	text-shadow: 0px 0px 5px #ffff00, 0px 0px 8px #ff8000, 0px -2px 10px #ff0000;
 }
 h2 { margin-top: 10px; text-align: center; }
 h3 { margin-top: 15px; }
@@ -101,4 +142,8 @@ hr { margin: 10px 0 10px 0; }
 input { background-image: url("washi1.jpg"); font-family: 'UD Digi Kyokasho N-R'; width: 200px; }
 textarea { width: 200px; background-image: url("washi1.jpg"); font-family: 'UD Digi Kyokasho N-R'; }
 .moji { display: inline; }
-.hint { display:none; color: red; }
+.hint { display: none; color: red; }
+.voblique { color: white; background-color: black; margin: 2px 0px; padding: 2px 0 0 2px; height: 40px; width: 48px; }
+.vlevel { color: black; background-color: white; margin: 2px 0px; padding: 2px 0 0 2px; height: 40px; width: 48px; }
+.vmixed { color: black; background-color: gray; margin: 2px 0px; padding: 2px 0 0 2px; height: 40px; width: 48px; }
+.rhyme { border: medium solid yellow; }
