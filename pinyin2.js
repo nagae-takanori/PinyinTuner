@@ -129,7 +129,7 @@ var showMatches = function(chr, cls){
 		Pronouns[tmp[0]][tmp[1] - 1] + '/</h4>' + LETTERS[tmp[0]][tmp[1] - 1].join(' '));
 };
 
-var verticalView = function(){
+var verticalView = function(){// LightBox に縦書き表示
 	var tbl = [];
 	var arr;
 	var j = 0;
@@ -198,8 +198,8 @@ var verticalView = function(){
 		tmp += '</div>';
 	}
 
-	$('#lightbox').css('width', 56 * (2 * numLines - 1))
-		.css('height', 46 * lineLength)
+	$('#lightbox').css('width', 56 * (2 * numLines - 1))// lightbox 全体の大きさ
+		.css('height', 65 * lineLength)
 		.html(tmp);
 	$('#lightbox').fadeIn('slow');// じわっと浮き出る。
 	$('#darkbox').show();

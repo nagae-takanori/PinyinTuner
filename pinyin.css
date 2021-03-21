@@ -1,8 +1,16 @@
 @charset "UTF-8";
+/* @import url(http://fonts.googleapis.com/earlyaccess/cwtexkai.css); */
+/* @import url(http://fonts.googleapis.com/earlyaccess/cwtexfangsong.css); */
+/* @import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css); */
+@import url(http://fonts.googleapis.com/earlyaccess/cwtexming.css);
 * {
 	margin: 0;
 	padding: 0;
 	z-index: 0;
+	/* font-family: 'cwTeXKai', serif; */
+	/* font-family: 'cwTeXFangSong', serif; */
+	/* font-family: 'Noto Sans TC', sans-serif; */
+	font-family: 'cwTeXMing', serif;
 }
 a {
 	text-decoration: none;
@@ -14,7 +22,6 @@ body {
 	position: absolute;
 	width: 100%;
 	background-image: url("bg.jpg");
-	font-family: 'UD Digi Kyokasho NP-R';
 	height: 100%;
 }
 #wrapper {
@@ -41,11 +48,7 @@ body {
 	background-color: white;
 	display: none;
 }
-.vline {
-	float: right;
-	margin: 0 1px;
-	font-size: 40px;
-}
+
 h1 {
 text-align: center;
 font-family: 'Times New Roman';
@@ -141,12 +144,22 @@ hr { margin: 10px 0 10px 0; }
 .box { margin: 2Spx 0 0 0; font-size: 14px; width: 245px; background-image: url("washi1.jpg"); display: none; border: solid 2px black; padding: 5px; text-align: left; font-family: serif; }
 .same { background-color: yellow; }
 .compat { background-color: lightgreen; }
-input { background-image: url("washi1.jpg"); font-family: 'UD Digi Kyokasho N-R'; width: 200px; }
-textarea { width: 200px; background-image: url("washi1.jpg"); font-family: 'UD Digi Kyokasho N-R'; }
+input { background-image: url("washi1.jpg"); font-family: width: 200px; }
+textarea { width: 200px; background-image: url("washi1.jpg");  }
 .moji { display: inline; }
 .hint { display: none; color: red; }
-.voblique { color: white; background-color: black; margin: 2px 0px; padding: 2px 0 0 2px; height: 40px; width: 48px; }
-.vlevel { color: black; background-color: white; margin: 2px 0px; padding: 2px 0 0 2px; height: 40px; width: 48px; }
-.vmixed { color: black; background-color: gray; margin: 2px 0px; padding: 2px 0 0 2px; height: 40px; width: 48px; }
-.rhyme { border: medium solid yellow; }
+
+.vline {
+	float: right;
+	margin: 0 1px;
+}
+.vline * {
+	margin: 2px 0px; padding: 4px 0px 0px 4px; height: 48px; width: 48px;
+	font-size: 45px;
+}
+.voblique { color: white; background-color: black;  }
+.vlevel { color: black; background-color: white;  }
+.vmixed { color: black; background-color: gray;  }
+.rhyme { border: 2px solid yellow; margin-left: -2px; }
 #baloon { position: absolute; display: none; background-color: white; padding: 2px; border-radius: 2px; }
+
