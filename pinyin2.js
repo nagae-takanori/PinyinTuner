@@ -186,10 +186,12 @@ var verticalView = function(){
 			tmp += '<div class="vlevel">';
 			if(i % 2 == 0){
 				tmp += ' ';
-			} else if(tbl[j][i][1] == tbl[j + 1][i][1]){
-				tmp += '＝';
-			} else {
-				tmp += '↔';
+			} else if(tbl[j][i][1] != 2 && tbl[j + 1][i][1] != 2){
+				if(tbl[j][i][1] == tbl[j + 1][i][1]){
+					tmp += '＝';
+				} else {
+					tmp += '↔';
+				}
 			}
 			tmp += '</div>';
 		}
@@ -254,11 +256,12 @@ var mainProc = function(){
 		}
 	);
 	$(".ruby").hover( // ルビのマウスオーバーの処理（再描画されるたびにイベントを再登録する必要がある）
-		function(){// マウスオーバー開始
+		function(e){// マウスオーバー開始
 			var c = this.className.split(' ')[0];// 同一韻
 			var d = [];// 通韻
 			
-			$('#messages').html($(this).children().html());
+			$('#baloon').css('margin-left', e.pageX - 10).css('margin-top', e.pageY + 10).html($(this).children().html()).show();
+			$('#messages').html("");
 			$.each(Compatibles, function(i, v){
 				if(v.indexOf(c) >= 0){
 					d = v;
@@ -287,6 +290,7 @@ var mainProc = function(){
 			});
 		},
 		function(){// マウスオーバー終了
+			$('#baloon').hide();
 			$(".ruby").each(function(i, v){
 				v.style.color = '';
 				v.style.backgroundColor = '';

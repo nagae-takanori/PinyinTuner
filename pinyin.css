@@ -11,6 +11,8 @@ html {
 	height: 100%;
 }
 body {
+	position: absolute;
+	width: 100%;
 	background-image: url("bg.jpg");
 	font-family: 'UD Digi Kyokasho NP-R';
 	height: 100%;
@@ -147,3 +149,4 @@ textarea { width: 200px; background-image: url("washi1.jpg"); font-family: 'UD D
 .vlevel { color: black; background-color: white; margin: 2px 0px; padding: 2px 0 0 2px; height: 40px; width: 48px; }
 .vmixed { color: black; background-color: gray; margin: 2px 0px; padding: 2px 0 0 2px; height: 40px; width: 48px; }
 .rhyme { border: medium solid yellow; }
+#baloon { position: absolute; display: none; background-color: white; padding: 2px; border-radius: 2px; }
