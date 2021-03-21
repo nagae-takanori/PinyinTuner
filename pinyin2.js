@@ -1,5 +1,5 @@
 var ProgramName = 'Pinyin Tuner';
-var Version = 20210316;
+var Version = 20210321;
 
 // カテゴリー 0から4まで
 var PinyinClasses = ["上平声", "下平声", "上声", "去声", "入声"];
