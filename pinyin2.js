@@ -2,14 +2,14 @@ var ProgramName = 'Pinyin Tuner';
 var Version = 20210321;
 
 // カテゴリー 0から4まで
-var PinyinClasses = ["上平声", "下平声", "上声", "去声", "入声"];
+var PinyinClasses = ["上平聲", "下平聲", "上聲", "去聲", "入聲"];
 
-// 通韻 平声だけ
+// 通韻 平聲だけ
 var Compatibles = [["0_1", "0_2", "0_3"],["0_4", "0_5"],["0_6", "0_7"],["0_8", "0_9", "0_10"],
 	["0_11", "0_12", "0_13", "0_14", "0_15", "1_1"], ["1_2", "1_3", "1_4"], ["1_5", "1_6"],
 	["1_8", "1_9", "1_10"], ["1_12", "1_13", "1_14", "1_15"]];
 
-// 発音
+// 發音
 var Pronouns =[
 	["uŋ","uoŋ","ʌŋ","iᴇ","ʉi","ɨʌ","ɨo","ei","ɛ","uʌi","iɪn","ɨun","ʉɐn","ɑn", "an"],
 	["en","eu","au","ɑu","ɑ","a","ɐŋ","æŋ","eŋ","ɨŋ","ɨu","iɪm","ʌm","iᴇm","ɛm"],
@@ -21,7 +21,7 @@ var pinyin_line = function(str){
 	var retval = [];
 	$.each(str.split(""), function(i0, v0){// 文字列を文字に分解
 		var hits = [];
-		$.each(LETTERS, function(i1, v1){// 上平声、下平声、上声、去声、入声
+		$.each(LETTERS, function(i1, v1){// 上平聲、下平聲、上聲、去聲、入聲
 			$.each(v1, function(i2, v2){
 				if(v2.indexOf(v0) >= 0){
 					hits.push([i1,i2,v2[0]]); 
@@ -33,7 +33,7 @@ var pinyin_line = function(str){
 	return retval;
 };
 
-var numLines;// 行の数
+var numLines;// 行の數
 var lineLength;// 行の長さ
 
 var lineByLine = function(line){
@@ -47,8 +47,8 @@ var lineByLine = function(line){
 			accent1 = values[1];
 			results = values[2];
 		}
-		var numObliq = 0;// 仄の数
-		var numLevel = 0;// 平の数
+		var numObliq = 0;// 仄の數
+		var numLevel = 0;// 平の數
 		var rhymes = []; // 韻
 
 		var tmp2 = '';
@@ -67,7 +67,7 @@ var lineByLine = function(line){
 			tmp2 += '<span class="' + rhyme + ' ' + tone + ' ruby">' + v1[2] + '<span class="hint">' + v1[3] + '</span></span>';
 		});
 		
-		if(results.length > 1){ // 複数判定
+		if(results.length > 1){ // 複數判定
 			if(numObliq == 0){ // 平
 				tone = "level";
 			} else if(numLevel == 0){ // 仄
@@ -77,7 +77,7 @@ var lineByLine = function(line){
 			}
 		} else if(results.length < 1){ // 判定不能
 			tone = "unknown";
-		} else { // 1種類
+		} else { // 1種類
 			if(numLevel == 1){
 				tone = "level";
 			} else {
@@ -105,7 +105,7 @@ var lineByLine = function(line){
 		tmp += '">';
 		tmp += '<a class="large ' + tone; // 平仄
 		if(column == lineLength){// 末尾の文字
-			tmp += ' rhyme" data-x="' + rhymes.join(' '); // カスタム属性 data-x に韻を入れる。
+			tmp += ' rhyme" data-x="' + rhymes.join(' '); // カスタム屬性 data-x に韻を入れる。
 		}
 		tmp += '" href="' + encodeURI('http://ja.wiktionary.org/wiki/' + char) + '">' + char + '</a><br>';
 		tmp += '<span>' + tmp2 + '</span>';
@@ -129,7 +129,7 @@ var showMatches = function(chr, cls){
 		Pronouns[tmp[0]][tmp[1] - 1] + '/</h4>' + LETTERS[tmp[0]][tmp[1] - 1].join(' '));
 };
 
-var verticalView = function(){// LightBox に縦書き表示
+var verticalView = function(){// LightBox に縱書き表示
 	var tbl = [];
 	var arr;
 	var j = 0;
@@ -198,7 +198,7 @@ var verticalView = function(){// LightBox に縦書き表示
 		tmp += '</div>';
 	}
 
-	$('#lightbox').css('width', 56 * (2 * numLines - 1))// lightbox 全体の大きさ
+	$('#lightbox').css('width', 56 * (2 * numLines - 1))// lightbox 全體の大きさ
 		.css('height', 65 * lineLength)
 		.html(tmp);
 	$('#lightbox').fadeIn('slow');// じわっと浮き出る。
@@ -255,7 +255,7 @@ var mainProc = function(){
 			};
 		}
 	);
-	$(".ruby").hover( // ルビのマウスオーバーの処理（再描画されるたびにイベントを再登録する必要がある）
+	$(".ruby").hover( // ルビのマウスオーバーの處理（再描畫されるたびにイベントを再登錄する必要がある）
 		function(e){// マウスオーバー開始
 			var c = this.className.split(' ')[0];// 同一韻
 			var d = [];// 通韻
@@ -305,7 +305,7 @@ var exampleListing = function(poetry, num){
 			$('#examples' + num + ' ul').append('<li>' + i0 + ' ' + i1 + '</li><br>');
 		});
 	});
-	// 例文をクリックしたときの処理
+	// 例文をクリックしたときの處理
 	$('#examples' + num + ' ul li').each(function(i, v){
 		var tmp = $(v).text().split(' ');
 		var tmp2 = poetry[tmp[0]][tmp[1]].replace(/\s/g, "\n");
@@ -318,7 +318,7 @@ var exampleListing = function(poetry, num){
 	});
 };
 
-$(function(){// ページが読み込まれた直後に一度だけ呼ばれる関数
+$(function(){// ページが讀み込まれた直後に一度だけ呼ばれる關數
 	// プログラムの名前やバージョンなどを html の中に埋め込む
 	$('.program_name').html(ProgramName);
 	$('.version').html(Version);
@@ -338,7 +338,7 @@ $(function(){// ページが読み込まれた直後に一度だけ呼ばれる�
 	});
 
 	$('#button1').on('click', mainProc);// 送信ボタンを押したら
-	mainProc();// 送信ボタンを押さなくても最初の1回は
+	mainProc();// 送信ボタンを押さなくても最初の1囘は
 	
 	// 例文のリスト
 	exampleListing(POETRY, 1);
@@ -346,7 +346,7 @@ $(function(){// ページが読み込まれた直後に一度だけ呼ばれる�
 	exampleListing(POETRY3, 3);
 
 	// いわゆるアコーディオン
-	$('.box').on('click', function (ev) { // 親へ伝播不可にする（メニューの中身をクリックしても反応しないように）。
+	$('.box').on('click', function (ev) { // 親へ傳播不可にする（メニューの中身をクリックしても反應しないように）。
        	ev.stopPropagation();
 	});
 	$('.menu').click(function() {// メニューをクリックしたら
