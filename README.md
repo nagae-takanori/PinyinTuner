@@ -5,6 +5,7 @@ PinyinTuner is a pinyin (平仄) checker for editing or analyzing Hanzi poems (�
 ## Usage
 
 Open pinyin_tuner.html in a web browser (firefox or google chrome).
+
 Edit the poem text in the textarea.
 Each line usually contains 5 or 7 characters.
 Press submit button to show the pinyin result.
