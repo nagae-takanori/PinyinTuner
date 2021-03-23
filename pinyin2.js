@@ -299,25 +299,6 @@ var mainProc = function(){
 	);
 };
 
-var exampleListing = function(poetry, num){
-	$.each(poetry, function(i0, v0){
-		$.each(v0, function(i1, v1){
-			$('#examples' + num + ' ul').append('<li>' + i0 + ' ' + i1 + '</li><br>');
-		});
-	});
-	// 例文をクリックしたときの處理
-	$('#examples' + num + ' ul li').each(function(i, v){
-		var tmp = $(v).text().split(' ');
-		var tmp2 = poetry[tmp[0]][tmp[1]].replace(/\s/g, "\n");
-		$(v).on('click', function(){
-			$('input[name="author"]').val(tmp[0]);
-			$('input[name="title"]').val(tmp[1]);
-			$('textarea[name="poetry"]').val(tmp2);
-			mainProc();
-		});
-	});
-};
-
 $(function(){// ページが讀み込まれた直後に一度だけ呼ばれる關數
 	// プログラムの名前やバージョンなどを html の中に埋め込む
 	$('.program_name').html(ProgramName);
@@ -325,11 +306,11 @@ $(function(){// ページが讀み込まれた直後に一度だけ呼ばれる�
 	$('title').html(ProgramName + ' ' + Version);
 
 	// デフォルトの詩を埋め込む
-	var author = "夏目漱石";
-	var title = "山路觀楓";
+	var author = DefaultPoem[0];
+	var title = DefaultPoem[1];
 	$("input[name='author']").val(author);
 	$("input[name='title']").val(title);
-	$('textarea').val(DefaultPoem[author][title].replace(/\s/g, "\n"));
+	$('textarea').val(DefaultPoem[2].replace(/\s/g, "\n"));
 	
 	$('#button2').on('click', verticalView);
 	$('#lightbox').click(function(){// ライトボックスをクリックしたら
@@ -341,9 +322,24 @@ $(function(){// ページが讀み込まれた直後に一度だけ呼ばれる�
 	mainProc();// 送信ボタンを押さなくても最初の1囘は
 	
 	// 例文のリスト
-	exampleListing(POETRY, 1);
-	exampleListing(POETRY2, 2);
-	exampleListing(POETRY3, 3);
+	var count = 0;
+	$.each(POEMS.reverse(), function(i, v){
+		$.each(v, function(i0, v0){// i0 奈良時代 v0 名前 タイトル 詩 ...
+			$('#sidebar2').prepend('<div class="menu"><div class="menutitle">' + i0 + '</div><div class="ex box"><ul id="epoc' + i + '"></ul>');
+			$.each(v0, function(author, v1){
+				$.each(v1, function(title, poem){
+					$('#epoc' + i).append('<li id="poem' + count + '">' + author + ' ' + title + '</li><br>');
+					$('#poem' + count).on('click', function(){
+						$('input[name="author"]').val(author);
+						$('input[name="title"]').val(title);
+						$('textarea[name="poetry"]').val(poem.replace(/\s/g, "\n"));
+						mainProc();
+					});
+					count += 1;
+				});
+			});
+		});
+	});
 
 	// いわゆるアコーディオン
 	$('.box').on('click', function (ev) { // 親へ傳播不可にする（メニューの中身をクリックしても反應しないように）。
